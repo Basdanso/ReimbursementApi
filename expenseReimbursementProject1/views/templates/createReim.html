@@ -1,0 +1,167 @@
+<style>
+
+  body{
+  margin: 0;
+  background: teal;
+  }
+  #reimbursement-form{
+
+  width:350px;
+  font-size:18px;
+  font-style:bold;
+  padding:10;
+  text-align:center;
+  border-radius:20px;
+  margin:10px 1 10 ;
+}
+
+</style>
+
+<title>Create</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+<body>
+<div>
+     <table class="table table-dark">
+
+        <thead>
+        <tr>
+            <th scope="col">Employee email:</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Reason</th>
+            <th scope="col">Status</th>
+
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+
+         <tbody>
+            {% for reimbursement in reimbursementList %}
+            <tr>
+            <td>{{reimbursement.email}}</td>
+            <td>{{reimbursement.transferAmount}}</td>
+            <td>{{reimbursement.status}}</td>
+            <td>{{reimbursement.reason}}</td>
+
+
+
+            {% endfor %}
+            </tr>
+         </tbody>
+
+     </table>
+</div>
+
+
+<div>
+    <form action='/employee/abc' method="POST" id="reimbursement-form" enctype="multipart/form-data">
+        <h3 align="center">My Reimbursement</h3>
+
+        <div class="form-group">
+            <label for="email">Enter Email</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+            />
+        </div>
+        <br>
+
+
+        <div class="form-group">
+            <label for="amount"> Amount</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="amount"
+                    name="transferAmount"
+                    placeholder="Enter Amount"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="reason">Enter Reason</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="reason"
+                    name="reason"
+                    placeholder="Reason"
+            />
+        </div>
+
+        <br/>
+        <button id="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+<script>
+
+    const reimbursement-form = document.getElementById("reimbursement-form");
+    reimbursement-form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+
+      fetch('login.php', {
+      method: 'post',
+      body: formData
+      }). then(function (response) {
+      return response.text();
+      }).then(function(text){
+      console.log(text);
+      }).catch(function(error) {
+      console.error(error);
+
+
+    });
+
+
+
+
+    async function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const form = event.currentTarget
+    const url = form.action;
+
+    try {
+       const formData = new FormData(form);
+       const responseData = await postFormDataAsJson({ url, formData});
+       console.log({responseData});
+    } catch (error) {
+        console.error(error);
+    }
+    }
+    async function postFormDataAsJson({ url, formData}) {
+         const plainFormData = Object.formEntries(formData.entries());
+         const formDataJsonString = JSON.stringify(plainFormData);
+
+         const fetchOptions = {
+             method: "POST",
+
+             headers: {
+                 "Content-Type": "application/json",
+                 Accept: "application/json"
+             },
+             body: formDataJsonString,
+         };
+         const response = await fetch( url, fetchOptions);
+         if (!response.ok) {
+             const errorMessage = await response.text();
+             throw new Error(errorMessage);
+         }
+         return response.json();
+    }
+
+
+</script>
+
+</body>

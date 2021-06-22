@@ -1,0 +1,44 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reimbursements</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+<body>
+<section>
+        <h1>Reimbursements</h1>
+        <!-- TABLE CONSTRUCTION-->
+        <table class="table" id ="display">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">EMAIL</th>
+      <th scope="col">AMOUNT</th>
+       <th scope="col">REASON</th>
+      <th scope="col">STATUS</th>
+    </tr>
+  </thead>
+	{% for reimbursement in reimbursements %}
+	<tr>
+	<td>{{reimbursement.id}}
+	</td>
+	<td>{{reimbursement.email}}
+	</td>
+	<td>{{reimbursement.transferAmount}}
+	</td>
+    <td>{{reimbursement.status}}
+	</td>
+    <td>{{reimbursement.reason}}
+	</td>
+
+	</tr>
+	{% endfor %}
+</table>
+</section>
+</body>
+</html>

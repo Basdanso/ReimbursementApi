@@ -1,0 +1,90 @@
+<style>
+
+  body{
+  margin: 0;
+  background: teal;
+  }
+  #register-form{
+
+  width:380px;
+  font-size:18px;
+  font-style:bold;
+  padding:10;
+  text-align:center;
+  border-radius:20px;
+  margin:10px 1 10 ;
+  }
+
+  input{
+  font-size:18px;
+  }
+
+
+</style>
+<div>
+    <form action='/register' method="POST" id="register-form" enctype="multipart/form-data">
+        <h3 align="center">Register</h3>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"
+                    placeholder="Enter name"
+            />
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Enter email"
+            />
+        </div>
+        <br>
+
+        <div class="form-group">-->
+            <label for="accountType">Type</label>-->
+            <input
+                    type="text"
+                    class="form-control"
+                    id="accountType"
+                    name="accountType"
+                    placeholder="Enter account type"-->
+            />
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="password1">Password</label>
+            <input
+                    type="password"
+                    class="form-control"
+                    id="password1"
+                    name="password1"
+                    placeholder="Enter password"
+            />
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="password2">Password</label>
+            <input
+                    type="password"
+                    class="form-control"
+                    id="password2"
+                    name="password2"
+                    placeholder="Confirm password"
+            />
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+
